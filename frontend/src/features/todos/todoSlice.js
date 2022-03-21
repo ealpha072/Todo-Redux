@@ -1,37 +1,25 @@
 const initialState = [
-    {id:1, text: "Learn react-reduct", completed:true},
-    {id:2, text: "Finish react project", completed:true},
-    {id:3, text: "Deploy  Heroku app with php to live sight", completed:true, color:'red'},
-    {id:4, text: "Build mern stack projects and deploy", completed:true, color:'blue'},
+    { id: 0, text: 'Learn React', completed: true },
+    { id: 1, text: 'Learn Redux', completed: false, color: 'purple' },
+    { id: 2, text: 'Build something fun!', completed: false, color: 'blue' }
 ]
 
-function nextId(todos){
-    return Math.max(...todos.map(item => item.id)) + 1
-}
 
-/*
-{type: 'todos/todoAdded', payload: todoText}
-{type: 'todos/todoToggled', payload: todoId}
-{type: 'todos/colorSelected, payload: {todoId, color}}
-{type: 'todos/todoDeleted', payload: todoId}
-{type: 'todos/allCompleted'}
-{type: 'todos/completedCleared'}
-{type: 'filters/statusFilterChanged', payload: filterValue}
-{type: 'filters/colorFilterChanged', payload: {color, changeType}} */
+const generateId = (listOfTodos) => Math.max(...listOfTodos.map(todo => todo.id) + 1)
 
-export default function todoReducer(state = initialState, action){
+const todoReducer = (state = initialState, action) => {
     switch(action.type){
-        case 'todos/addTodo':{
-            return[
+        case 'todos/addedNewTodo':{
+            return [
                 ...state,
                 {
-                    id: nextId(state),
-                    text: action.payload,
+                    id:generateId(state),
+                    text:action.payload,
                     completed: false
                 }
             ]
         }
-        case 'todos/completedToggled':{
+        case 'todos/completedChanged':{
             return state.map(todo => {
                 if(todo.id !== action.payload){
                     return todo
@@ -42,33 +30,20 @@ export default function todoReducer(state = initialState, action){
                 }
             })
         }
-        
-        case 'todos/colorSelected': {
-            const {todoId, color} = action.payload
-            return state.map(todo => {
-                if(todo.id !== todoId){
-                    return todo
-                }
-                return{
-                    ...todo,
-                    color
-                }
-            })
-        }
-        case 'todos/todoDeleted': {
-            return state.filter(todo => todo.id !== action.payload)
-        }
-
         case 'todos/allCompleted':{
             return state.map(todo => {
-                return {...todo, completed: true}
+                return {...todo, completed:true}
             })
         }
-        case 'todos/completedCleared': {
-            return state.filter(todo => todo.completed === false )
+        case 'todos/clearCompleted':{
+            return state.filter(todo => !todo.completed)
         }
-        default :
-
-        return state
+        case 'todos/deleted':{
+            return state.filter(todo => todo.id !== action.payload)
+        }
+        default:
+            return state
     }
 }
+
+export default todoReducer
