@@ -1,11 +1,12 @@
-export const allowedFilters = {
+export const statusFilters = {
     All: 'All',
     Active:'Active',
     Completed: 'Completed '
 }
 
 const initialState = {
-    status:allowedFilters.All
+    status:statusFilters.All,
+    colors: []
 }
 
 const filterReducer = (state = initialState, action) => {

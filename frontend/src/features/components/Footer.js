@@ -1,27 +1,31 @@
 import React from "react";
-import { allowedFilters } from "../filters/filterSlice";
+import { statusFilters } from "../filters/filterSlice";
 import { availableColors, capitalize } from "../filters/colors";
 import { useSelector, useDispatch } from "react-redux";
 
-const Footer = () => {
-    const dispatch = useDispatch()
-    const numbeOfUncompletedTodos = useSelector(state => {
-        const unCompletedTodos = state.todos.filter(todo => !todo.completed)
-        return unCompletedTodos.length
+const FilterByStatusOptions = ({value:status, onChange}) => {
+    const filterOptionsToRender = Object.keys(statusFilters).map(key => {
+        const value = statusFilters[key]
+        const handleClick = () => onChange(value)
+
+        return(
+            <li key={value}>
+                <button onClick={handleClick}>
+                    {key}
+                </button>
+            </li>
+        )
     })
+    return (
+        <div>
+            <h3>Filter by Status </h3>
+            <ul>{filterOptionsToRender}</ul>
+        </div>
+        
+    )
+}
 
-    const markAllComplete = () => {
-        dispatch({type:'todos/allCompleted'})
-    }
-
-    const clearCompleted = () => {
-        dispatch({type:'todos/clearCompleted'})
-    }
-
-    const renderFilters = Object.keys(allowedFilters).map(key => {
-        return <li key={key}><button>{allowedFilters[key]}</button></li>
-    })
-
+const ColorFilters = () => {
     const renderColorOptions = availableColors.map(color => {
         return(
             <li key={color} style={{listStyleType:'none'}}>
@@ -32,6 +36,34 @@ const Footer = () => {
             </li>
         )
     })
+    return (
+        <div>
+            <h3>Filter by Color</h3>
+            <ul>{renderColorOptions}</ul>
+        </div>
+    )
+}
+
+
+const Footer = () => {
+    const dispatch = useDispatch()
+    const numbeOfUncompletedTodos = useSelector(state => {
+        const unCompletedTodos = state.todos.filter(todo => !todo.completed)
+        return unCompletedTodos.length
+    })
+    const {status, colors} = useSelector(state => state.filters)
+
+    const markAllComplete = () => {
+        dispatch({type:'todos/allCompleted'})
+    }
+
+    const clearCompleted = () => {
+        dispatch({type:'todos/clearCompleted'})
+    }
+
+    const onFilterByStatusChange = (status) => {
+        dispatch({type:'filters/statusFilterChanged', payload:status})
+    }
 
     return (
         <footer>
@@ -42,7 +74,6 @@ const Footer = () => {
         
             <div>
                 <h3>Actions</h3>
-                
                     <button onClick={markAllComplete}>
                         Mark All Completed
                     </button>
@@ -53,19 +84,9 @@ const Footer = () => {
             </div>
 
             <div style={{display:'inline-flex'}}>
-                <h3>Filter by options</h3>
-                <div>
-                    <ul>
-                        {renderFilters}
-                    </ul>
-                </div>
-                <div>
-                    <ul>
-                        {renderColorOptions}
-                    </ul>
-                </div>
+                <FilterByStatusOptions value={status} onChange={onFilterByStatusChange} />
+                <ColorFilters />
             </div>
-            
         </footer>
     )
 }
