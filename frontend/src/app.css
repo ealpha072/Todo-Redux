@@ -148,6 +148,14 @@ li div{
     padding-right:10px;
 }
 
+.fa-pencil-square-o:hover{
+    color:rgb(14, 143, 14);
+    transform: scale(1.02);
+}
+.fa-trash-o:hover{
+    color:rgb(223, 11, 11);
+    transform:scale(1.02)
+}
 
 @media screen and (min-width:320px) and (max-width:720px) {
     .app-container{
