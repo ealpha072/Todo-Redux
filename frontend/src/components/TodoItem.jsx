@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { toggleImportance, deleteSingle } from '../redux/actions/todoActions'
 
 
-const TodoItem = () => {
+const TodoItem = () => { 
   const dispatch = useDispatch()
   const todos = useSelector(state => state.todos.todos)
 

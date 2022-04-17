@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import { useDispatch } from 'react-redux'
 import { addNew, clearAll, clearCompleted } from '../redux/actions/todoActions'
 
+import { getAll, createTodo } from '../API/todo'
+
 const Actions = () => {
     const dispatch = useDispatch()
 
@@ -17,6 +19,7 @@ const Actions = () => {
             }
 
             console.log(newTodo)
+            createTodo(newTodo).then(response => console.log(response.data))
             dispatch(addNew(newTodo))
             setTodo('')
        }
