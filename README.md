@@ -5,10 +5,10 @@ See demo here --> https://mysterious-brushlands-43467.herokuapp.com/
 
 ### Dependencies used
 #### Frontend:
-   * `react-dom`
-   * `react-redux`
-   * `redux`
-   * `axios`
+   * `react-dom` - For react dom navigation
+   * `react-redux` - For linking react and redux
+   * `redux`- For state management
+   * `axios` - For making API calls to backend
  #### Backend:
   * `cors` -  For cross origin requests
   * `express` - server definations
