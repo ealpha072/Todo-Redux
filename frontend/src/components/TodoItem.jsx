@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleImportance, deleteSingle } from '../redux/actions/todoActions'
-import { update } from '../API/todo'
+import { update, deleteTodo } from '../API/todo'
 
 const TodoItem = () => { 
   const dispatch = useDispatch()
@@ -25,7 +25,10 @@ const TodoItem = () => {
           </div>
           <div className="actions">
               <i className="fa fa-pencil-square-o"></i>
-              <i className="fa fa-trash-o" onClick={()=>dispatch(deleteSingle(todo.id))}></i>
+              <i  
+                className="fa fa-trash-o" 
+                onClick={()=>deleteTodo(todo.id).then(data => dispatch(deleteSingle(todo.id)))}>
+              </i>
           </div>
       </li>
     )

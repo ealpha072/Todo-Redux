@@ -45,3 +45,21 @@ export const deleteTodo = async (req, res) => {
         res.status(404).json({message:error.message})
     }
 }
+
+export const clearCompleted = async (req, res) => {
+    try{
+        await Todo.deleteMany({completed:true})
+        res.status(200).json({message:'Successfully deleted completed tasks'})
+    }catch(error){
+        res.status(404).json({message:error.message})
+    }
+}
+
+export const clearAll = async (req, res) => {
+    try{
+        await Todo.deleteMany()
+        res.status(200).json({message:'Successfully deleted all tasks'})
+    }catch (error){
+        res.status(404).json({message:error.message})
+    }
+}

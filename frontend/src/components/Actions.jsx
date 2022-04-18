@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { useDispatch } from 'react-redux'
 import { addNew, clearAll, clearCompleted } from '../redux/actions/todoActions'
 
-import { getAll, createTodo } from '../API/todo'
+import { createTodo, deleteAll, deleteCompleted } from '../API/todo'
 
 const Actions = () => {
     const dispatch = useDispatch()
@@ -27,14 +27,14 @@ const Actions = () => {
 
     const handleClearAll = (e) => {
         e.preventDefault()
-        if(window.confirm('Clear all todos')){
-            dispatch(clearAll())
+        if(window.confirm('Clear all todos ? This will clear all your data')){
+            deleteAll().then(data => dispatch(clearAll()))
         }
     }
 
     const clearCompletedTasks = (e) => {
         e.preventDefault()
-        dispatch(clearCompleted())
+        deleteCompleted().then(data => dispatch(clearCompleted()))
     }
 
     return (

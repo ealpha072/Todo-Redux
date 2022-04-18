@@ -15,3 +15,18 @@ export const update = async (id, object) => {
     const request = await axios.put(`${baseUrl}/update/${id}`, object)
     return request.data
 }
+
+export const deleteTodo = async (id) => {
+    const request = await axios.delete(`${baseUrl}/delete/${id}`)
+    return request.data
+}
+
+export const deleteCompleted = async () => {
+    const request = await axios.delete(`${baseUrl}/deleteCompleted`)
+    return request.data
+}
+
+export const deleteAll = async () => {
+    const request = await axios.delete(`${baseUrl}/deleteAll`)
+    return request.data
+}
