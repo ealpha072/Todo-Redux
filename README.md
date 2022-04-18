@@ -16,3 +16,21 @@ See demo here --> https://mysterious-brushlands-43467.herokuapp.com/
   * `nodemon` - for automatic server restart on edit
   * `body-parser` - for json parsing
   * `dotenv` - for heroku deployment
+### Sample code ;
+```
+export const toggleImportance = async (req, res) => {
+    const body = req.body
+    const newState = {
+        title:body.title,
+        completed: !body.completed
+    }
+
+    try {
+        await Todo.findByIdAndUpdate(req.params.id, newState, {new:true})
+        res.status(200).json(newState)
+    } catch (error) {
+        res.status(404).json({message:error.message})
+    }
+}
+
+```
