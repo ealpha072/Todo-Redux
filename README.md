@@ -17,7 +17,7 @@ See demo here --> https://mysterious-brushlands-43467.herokuapp.com/
   * `body-parser` - for json parsing
   * `dotenv` - for heroku deployment
 ### Sample code ;
-```
+```javascript
 export const toggleImportance = async (req, res) => {
     const body = req.body
     const newState = {
