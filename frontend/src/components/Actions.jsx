@@ -19,7 +19,7 @@ const Actions = () => {
             }
 
             console.log(newTodo)
-            createTodo(newTodo).then(response => console.log(response.data))
+            createTodo(newTodo)
             dispatch(addNew(newTodo))
             setTodo('')
        }

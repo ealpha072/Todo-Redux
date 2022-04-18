@@ -34,3 +34,9 @@ export const deleteSingle = (id) => {
 }
 
 
+export const getAllTodos = (todos) => {
+    return{
+        type:ActionTypes.GET_ALL,
+        payload:todos
+    }
+}

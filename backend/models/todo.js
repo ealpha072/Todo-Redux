@@ -12,6 +12,14 @@ const TodoSchema = new mongoose.Schema({
     }
 })
 
+TodoSchema.set('toJSON', {
+    transform:(document, returnedObject) => {
+        returnedObject.id = returnedObject._id.toString()
+        delete returnedObject._id
+        delete returnedObject.__v
+    }
+})
+
 const Todo = mongoose.model('Todo', TodoSchema)
 
 export default Todo

@@ -1,27 +1,7 @@
 import { ActionTypes } from "../actions/actions";
 
 const intialState = {
-    todos:[{
-        id:Math.ceil(Math.random()*1000),
-        title:'Buy new shoes for the game',
-        completed:false,
-    },{
-        id:Math.ceil(Math.random()*1000),
-        title:'Buy groceries',
-        completed:true
-    },{
-        id:Math.ceil(Math.random()*1000),
-        title:'Buy more items from the shop',
-        completed:false
-    },{
-        id:Math.ceil(Math.random()*1000),
-        title:'Visit parents',
-        completed:true
-    },{
-        id:Math.ceil(Math.random()*1000),
-        title:'Do alot of things together',
-        completed:true
-    }]
+    todos:[]
 }
 
 
@@ -53,6 +33,11 @@ const todoReducer = (state = intialState, {type, payload}) =>{
             return{
                 ...state,
                 todos:[...state.todos.filter(todo => todo.id !== payload)]
+            }
+        case ActionTypes.GET_ALL:
+            return{
+                ...state,
+                todos:payload
             }
             
         default:
