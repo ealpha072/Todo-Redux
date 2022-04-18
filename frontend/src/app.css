@@ -111,6 +111,10 @@ input:focus{
     cursor:pointer;
 }
 
+li input[type = checkbox] {
+    transform: scale(1.5);
+    cursor:pointer;
+}
 
 li{
     list-style-type:none;

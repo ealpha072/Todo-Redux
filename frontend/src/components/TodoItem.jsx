@@ -4,6 +4,11 @@ import { toggleImportance, deleteSingle } from '../redux/actions/todoActions'
 import { update, deleteTodo } from '../API/todo'
 
 const TodoItem = () => { 
+  const completedStyle = {
+    textDecoration: "line-through",
+    fontStyle: "italic",
+    opacity: 0.4
+  }
   const dispatch = useDispatch()
   const todos = useSelector(state => state.todos.todos)
 
@@ -21,7 +26,7 @@ const TodoItem = () => {
                 } 
               />
 
-              <label htmlFor="">{todo.title}</label>
+              <label htmlFor="" style={todo.completed ? completedStyle: null }>{todo.title}</label>
           </div>
           <div className="actions">
               <i className="fa fa-pencil-square-o"></i>

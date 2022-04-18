@@ -13,7 +13,6 @@ const Actions = () => {
        if(e.code === 'Enter'){
             e.preventDefault()
             const newTodo = {
-                id:Math.ceil(Math.random()*100),
                 title:todo,
                 completed:false
             }
