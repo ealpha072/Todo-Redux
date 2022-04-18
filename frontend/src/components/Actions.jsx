@@ -16,10 +16,7 @@ const Actions = () => {
                 title:todo,
                 completed:false
             }
-
-            console.log(newTodo)
-            createTodo(newTodo)
-            dispatch(addNew(newTodo))
+            createTodo(newTodo).then(data => dispatch(addNew(data)))
             setTodo('')
        }
     }

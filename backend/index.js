@@ -14,7 +14,7 @@ app.use(express.static('build'))
 
 app.use('/todos', router)
 
-const url = process.env.MONGO_URI
+const url = process.env.MONGODB_URI 
 const PORT = process.env.PORT || 3001
 
 mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
