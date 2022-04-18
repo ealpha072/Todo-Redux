@@ -9,6 +9,7 @@ export const getAllTodos = async (req, res) => {
     }   
 }
 
+
 export const createTodo = async (req, res) =>{
     const todoDetails = req.body
     const newTodo = new Todo(todoDetails)
@@ -16,6 +17,21 @@ export const createTodo = async (req, res) =>{
     try {
         await newTodo.save()
         res.status(200).json(newTodo)
+    } catch (error) {
+        res.status(404).json({message:error.message})
+    }
+}
+
+export const toggleImportance = async (req, res) => {
+    const body = req.body
+    const newState = {
+        title:body.title,
+        completed: !body.completed
+    }
+
+    try {
+        await Todo.findByIdAndUpdate(req.params.id, newState, {new:true})
+        res.status(200).json(newState)
     } catch (error) {
         res.status(404).json({message:error.message})
     }

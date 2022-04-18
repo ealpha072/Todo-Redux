@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleImportance, deleteSingle } from '../redux/actions/todoActions'
-
+import { update } from '../API/todo'
 
 const TodoItem = () => { 
   const dispatch = useDispatch()
@@ -14,7 +14,11 @@ const TodoItem = () => {
               <input 
                 type="checkbox" 
                 checked={todo.completed ? 'checked' : ''} 
-                onChange={()=>dispatch(toggleImportance(todo.id))} 
+                onChange={
+                  ()=>{
+                    update(todo.id, todo).then(data => dispatch(toggleImportance(todo.id)))
+                  }
+                } 
               />
 
               <label htmlFor="">{todo.title}</label>

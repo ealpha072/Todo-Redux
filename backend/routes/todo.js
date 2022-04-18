@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import express from "express";
 const router = express.Router()
 
-import { getAllTodos, createTodo, deleteTodo } from "../controllers/todo.js";
+import { getAllTodos, createTodo, deleteTodo, toggleImportance } from "../controllers/todo.js";
 
 /**
  * @route GET api/todo
@@ -12,12 +12,13 @@ import { getAllTodos, createTodo, deleteTodo } from "../controllers/todo.js";
 
 router.get('/', getAllTodos)
 
+
 /**
  * @route PUT api/todo/::id
  * @description update todo with given id
  * @access public
  */
-router.put('/:id');
+router.put('/update/:id', toggleImportance);
 
 /**
  * @route POST api/todo
